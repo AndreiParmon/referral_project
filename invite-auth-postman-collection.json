@@ -1,0 +1,105 @@
+{
+  "info": {
+    "name": "Invite Auth API",
+    "_postman_id": "e230f9c0-a728-47d4-bb11-7a6ce4cfda95",
+    "description": "Авторизация по номеру, верификация, профиль, инвайт-код",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Запросить код авторизации",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"phone\": \"375331234567\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/request-code/",
+          "protocol": "http",
+          "host": ["127.0.0.1"],
+          "port": "8000",
+          "path": ["api", "request-code", ""]
+        }
+      }
+    },
+    {
+      "name": "2. Верификация кода",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"phone\": \"375331234567\",\n  \"code\": \"1234\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/verify-code/",
+          "protocol": "http",
+          "host": ["127.0.0.1"],
+          "port": "8000",
+          "path": ["api", "verify-code", ""]
+        }
+      }
+    },
+    {
+      "name": "3. Получить профиль (требуется токен)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token ВАШ_ТОКЕН_ЗДЕСЬ",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/profile/",
+          "protocol": "http",
+          "host": ["127.0.0.1"],
+          "port": "8000",
+          "path": ["api", "profile", ""]
+        }
+      }
+    },
+    {
+      "name": "4. Активировать чужой инвайт-код",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token ВАШ_ТОКЕН_ЗДЕСЬ",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"invite_code\": \"Z9X8Y7\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/activate-invite/",
+          "protocol": "http",
+          "host": ["127.0.0.1"],
+          "port": "8000",
+          "path": ["api", "activate-invite", ""]
+        }
+      }
+    }
+  ]
+}

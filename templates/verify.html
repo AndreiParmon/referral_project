@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Подтверждение{% endblock %}
+{% block heading %}Подтверждение номера{% endblock %}
+
+{% block content %}
+    {% if messages %}
+        <script>
+            {% for msg in messages %}
+                alert("{{ msg|escapejs }}");
+            {% endfor %}
+        </script>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Подтвердить</button>
+    </form>
+
+{% endblock %}

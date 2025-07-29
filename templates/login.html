@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Вход{% endblock %}
+{% block heading %}Ввод телефона{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <small style="color: red;">Введите номер без знака '+', например: 375331234567</small><br><br>
+        <button type="submit">Отправить код</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: referral_project_db
+      POSTGRES_USER: referral_project
+      POSTGRES_PASSWORD: 1gevWSzp
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DB_NAME: referral_project_db
+      DB_USER: referral_project
+      DB_PASSWORD: 1gevWSzp
+      DB_HOST: db
+
+volumes:
+  postgres_data:

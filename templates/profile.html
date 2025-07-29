@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Профиль{% endblock %}
+{% block heading %}Ваш профиль{% endblock %}
+
+{% block content %}
+    <p>Ваш номер: {{ user.phone }}</p>
+    <p>Ваш инвайт-код: <strong>{{ your_code }}</strong></p>
+
+    {% if activated_code %}
+        <p>Вы активировали код: {{ activated_code }}</p>
+    {% else %}
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="invite_code" placeholder="Введите инвайт-код">
+            <button type="submit">Активировать</button>
+        </form>
+    {% endif %}
+
+    <h3>Вы пригласили:</h3>
+    <ul>
+        {% for user in invited_users %}
+            <li>{{ user.phone }}</li>
+        {% empty %}
+            <li>Пока никого</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
